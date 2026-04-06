@@ -1,0 +1,77 @@
+@import "tailwindcss";
+
+/* ------------------------------------------ */
+/* Tailwind v4 Theme Mapping                  */
+/* ------------------------------------------ */
+@theme {
+  /* This maps your colors so you can use text-green-dark, bg-green-primary, etc. */
+  --color-green-primary: #16A34A;
+  --color-green-light: #4ADE80;
+  --color-green-dark: #166534;
+
+  --color-yellow: #FACC15;
+  --color-yellow-soft: #FEF08A;
+  
+  --color-nav-bg: #E6F0E9;
+
+  /* Font Mapping */
+  --font-regina: "Regina", var(--font-jost), "Inter", system-ui,
+    -apple-system, sans-serif;
+  --font-sans: var(--font-jost), "Inter", system-ui,
+    -apple-system, sans-serif;
+}
+
+/* ------------------------------------------ */
+/* Custom Regina Font Face                    */
+/* ------------------------------------------ */
+@layer base {
+  @font-face {
+    font-family: "Regina";
+    src: url("/fonts/Regina-Regular.woff2") format("woff2");
+    font-weight: 400;
+    font-style: normal;
+    font-display: swap;
+  }
+
+  body {
+    @apply bg-neutral-50 text-neutral-900 antialiased;
+    font-family: var(--font-sans);
+  }
+
+  h1, h2, h3, .font-display {
+    font-family: var(--font-regina);
+    @apply tracking-tight;
+  }
+}
+
+/* ------------------------------------------ */
+/* Components using @apply                    */
+/* ------------------------------------------ */
+@layer components {
+  .btn-primary {
+    /* Now 'bg-green-dark' is recognized because it's in @theme */
+    @apply bg-green-dark text-yellow px-8 py-3 rounded-full font-bold transition-all hover:scale-105 active:scale-95 shadow-md inline-flex items-center justify-center;
+  }
+
+  .btn-outline {
+    @apply bg-white border-2 border-green-dark text-green-dark px-8 py-3 rounded-full font-bold hover:bg-nav-bg transition-colors;
+  }
+
+  .card {
+    @apply bg-white p-6 shadow-sm border border-neutral-200 rounded-[1.5rem];
+  }
+}
+
+/* ------------------------------------------ */
+/* Animations                                 */
+/* ------------------------------------------ */
+@layer utilities {
+  @keyframes scroll {
+    0% { transform: translateX(0); }
+    100% { transform: translateX(50%); }
+  }
+
+  .animate-scroll {
+    animation: scroll 30s linear infinite;
+  }
+}
