@@ -1,77 +1,122 @@
 @import "tailwindcss";
 
-/* ------------------------------------------ */
-/* Tailwind v4 Theme Mapping                  */
-/* ------------------------------------------ */
-@theme {
-  /* This maps your colors so you can use text-green-dark, bg-green-primary, etc. */
-  --color-green-primary: #16A34A;
-  --color-green-light: #4ADE80;
-  --color-green-dark: #166534;
+/* -----------------------------
+   CSS Variables
+------------------------------*/
+:root {
+  /* Typography */
+  --foreground-rgb: 245, 245, 245;
+  --background-rgb: 15, 15, 22; 
 
-  --color-yellow: #FACC15;
-  --color-yellow-soft: #FEF08A;
+  /* Fonts - mapping the Next.js variable */
+  --font-regina: "Regina", serif;
+  --font-sans: var(--font-jost), "Inter", system-ui, sans-serif;
+
+  /* Brand Colors */
+  --port-yellow: #f5d456;
+  --port-yellow-rgb: 245, 212, 86;
   
-  --color-nav-bg: #E6F0E9;
+  --port-blue: #011372;
+  --port-blue-rgb: 1, 19, 114;
 
-  /* Font Mapping */
-  --font-regina: "Regina", var(--font-jost), "Inter", system-ui,
-    -apple-system, sans-serif;
-  --font-sans: var(--font-jost), "Inter", system-ui,
-    -apple-system, sans-serif;
+  --port-sky: #02b3e9;
+  --port-sky-rgb: 2, 179, 233;
+
+  --earth: #a0937d;
+  --surface-dark: #0f0f16;
+
+  /* Glass Effects */
+  --glass-bg: rgba(255, 255, 255, 0.02);
+  --glass-border: rgba(255, 255, 255, 0.08);
+  --glass-blur: blur(12px);
 }
 
-/* ------------------------------------------ */
-/* Custom Regina Font Face                    */
-/* ------------------------------------------ */
-@layer base {
-  @font-face {
-    font-family: "Regina";
-    src: url("/fonts/Regina-Regular.woff2") format("woff2");
-    font-weight: 400;
-    font-style: normal;
-    font-display: swap;
-  }
-
-  body {
-    @apply bg-neutral-50 text-neutral-900 antialiased;
-    font-family: var(--font-sans);
-  }
-
-  h1, h2, h3, .font-display {
-    font-family: var(--font-regina);
-    @apply tracking-tight;
-  }
+/* -----------------------------
+   Base styles
+------------------------------*/
+html {
+  scroll-behavior: smooth;
+  background-color: var(--surface-dark); /* Prevent white flash on load */
 }
 
-/* ------------------------------------------ */
-/* Components using @apply                    */
-/* ------------------------------------------ */
-@layer components {
-  .btn-primary {
-    /* Now 'bg-green-dark' is recognized because it's in @theme */
-    @apply bg-green-dark text-yellow px-8 py-3 rounded-full font-bold transition-all hover:scale-105 active:scale-95 shadow-md inline-flex items-center justify-center;
-  }
-
-  .btn-outline {
-    @apply bg-white border-2 border-green-dark text-green-dark px-8 py-3 rounded-full font-bold hover:bg-nav-bg transition-colors;
-  }
-
-  .card {
-    @apply bg-white p-6 shadow-sm border border-neutral-200 rounded-[1.5rem];
-  }
+body {
+  color: rgb(var(--foreground-rgb));
+  background-color: var(--surface-dark);
+  font-family: var(--font-sans);
+  line-height: 1.6;
+  overflow-x: hidden;
+  position: relative;
 }
 
-/* ------------------------------------------ */
-/* Animations                                 */
-/* ------------------------------------------ */
-@layer utilities {
-  @keyframes scroll {
-    0% { transform: translateX(0); }
-    100% { transform: translateX(50%); }
-  }
+/* --- THE GLOBAL AMBIENT GLOW --- */
+body::before {
+  content: "";
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: 
+    radial-gradient(circle at 15% 15%, rgba(var(--port-sky-rgb), 0.08) 0%, transparent 35%),
+    radial-gradient(circle at 85% 85%, rgba(var(--port-yellow-rgb), 0.05) 0%, transparent 35%);
+  z-index: -1;
+  pointer-events: none;
+}
 
-  .animate-scroll {
-    animation: scroll 30s linear infinite;
-  }
+/* --- THE WAVY LINE BACKGROUND --- */
+/* This adds the subtle pattern seen in your reference image */
+body::after {
+  content: "";
+  position: fixed;
+  inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg width='100%25' height='100%25' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M0 400 Q 350 150 700 400 T 1400 400' stroke='rgba(255,255,255,0.03)' fill='transparent'/%3E%3C/svg%3E");
+  background-repeat: repeat-y;
+  background-size: cover;
+  z-index: -1;
+  opacity: 0.5;
+  pointer-events: none;
+}
+
+/* --- COMPONENTS --- */
+
+.glass-panel {
+  background: var(--glass-bg);
+  backdrop-filter: var(--glass-blur);
+  -webkit-backdrop-filter: var(--glass-blur);
+  border: 1px solid var(--glass-border);
+  border-radius: 24px;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+  transition: all 0.4s ease;
+}
+
+.glass-panel:hover {
+  border: 1px solid rgba(var(--port-sky-rgb), 0.2);
+  background: rgba(255, 255, 255, 0.04);
+}
+
+.heading-glow {
+  font-family: var(--font-regina);
+  text-transform: uppercase;
+  letter-spacing: -0.02em;
+}
+
+/* --- SCROLLBAR --- */
+::-webkit-scrollbar {
+  width: 5px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--surface-dark);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--earth);
+  border-radius: 20px;
+}
+
+@font-face {
+  font-family: "Regina";
+  src: url("/fonts/Regina-Regular.woff2") format("woff2");
+  font-weight: 400;
+  font-display: swap;
 }
