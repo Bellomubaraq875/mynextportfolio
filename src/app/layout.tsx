@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Jost } from "next/font/google";
+import { Jost, Orbitron } from "next/font/google";
 import "./globals.css";
 import Header from "./components/layout/Header";
 import Footer from "./components/layout/Footer";
@@ -7,7 +7,14 @@ import Footer from "./components/layout/Footer";
 const jost = Jost({
   subsets: ["latin"],
   weight: ["400", "500", "600", "700"],
-  variable: "--font-jost", 
+  variable: "--font-jost",
+  display: "swap",
+});
+
+const orbitron = Orbitron({
+  subsets: ["latin"],
+  weight: ["400", "700"],
+  variable: "--font-orbitron",
   display: "swap",
 });
 
@@ -23,10 +30,12 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    
-    <html lang="en" className={`${jost.variable} scroll-smooth`}>
-     
-      <body className="font-sans antialiased">
+    <html
+      lang="en"
+      className={`${jost.variable} ${orbitron.variable} scroll-smooth bg-[#0a0a0a]`}
+      suppressHydrationWarning
+    >
+      <body className="font-sans antialiased bg-[#0a0a0a] text-white selection:bg-port-sky/30 selection:text-port-sky">
         <Header />
         <main>{children}</main>
         <Footer />

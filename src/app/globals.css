@@ -1,70 +1,62 @@
 @import "tailwindcss";
+@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400..900&display=swap');
 
-/* -----------------------------
-   CSS Variables
-------------------------------*/
-:root {
-  /* Typography */
-  --foreground-rgb: 245, 245, 245;
-  --background-rgb: 15, 15, 22; 
-
-  /* Fonts - mapping the Next.js variable */
+@theme {
+  /* --- Fonts --- */
   --font-regina: "Regina", serif;
+  --font-orbitron: "Orbitron", sans-serif;
   --font-sans: var(--font-jost), "Inter", system-ui, sans-serif;
 
-  /* Brand Colors */
-  --port-yellow: #f5d456;
-  --port-yellow-rgb: 245, 212, 86;
-  
-  --port-blue: #011372;
-  --port-blue-rgb: 1, 19, 114;
+  /* --- Colors --- */
+  --color-port-yellow: #f5d456;
+  --color-port-blue: #011372;
+  --color-port-sky: #02b3e9;
+  --color-earth: #a0937d;
+  --color-surface-dark: #0f0f16;
 
-  --port-sky: #02b3e9;
-  --port-sky-rgb: 2, 179, 233;
+  /* --- RGB Variants (for opacity control in Tailwind) --- */
+  --color-port-sky-rgb: 2, 179, 233;
+  --color-port-yellow-rgb: 245, 212, 86;
+}
 
-  --earth: #a0937d;
-  --surface-dark: #0f0f16;
-
-  /* Glass Effects */
+/* -----------------------------
+   Custom CSS Variables
+------------------------------*/
+:root {
   --glass-bg: rgba(255, 255, 255, 0.02);
   --glass-border: rgba(255, 255, 255, 0.08);
   --glass-blur: blur(12px);
 }
 
 /* -----------------------------
-   Base styles
+   Base Styles
 ------------------------------*/
 html {
   scroll-behavior: smooth;
-  background-color: var(--surface-dark); /* Prevent white flash on load */
+  background-color: var(--color-surface-dark);
 }
 
 body {
-  color: rgb(var(--foreground-rgb));
-  background-color: var(--surface-dark);
+  color: #f5f5f5;
+  background-color: var(--color-surface-dark);
   font-family: var(--font-sans);
   line-height: 1.6;
   overflow-x: hidden;
-  position: relative;
 }
 
 /* --- THE GLOBAL AMBIENT GLOW --- */
 body::before {
   content: "";
   position: fixed;
-  top: 0;
-  left: 0;
-  width: 100vw;
-  height: 100vh;
+  inset: 0;
   background: 
-    radial-gradient(circle at 15% 15%, rgba(var(--port-sky-rgb), 0.08) 0%, transparent 35%),
-    radial-gradient(circle at 85% 85%, rgba(var(--port-yellow-rgb), 0.05) 0%, transparent 35%);
+    radial-gradient(circle at 15% 15%, rgba(2, 179, 233, 0.08) 0%, transparent 35%),
+    radial-gradient(circle at 85% 85%, rgba(245, 212, 86, 0.05) 0%, transparent 35%);
   z-index: -1;
   pointer-events: none;
 }
 
 /* --- THE WAVY LINE BACKGROUND --- */
-/* This adds the subtle pattern seen in your reference image */
 body::after {
   content: "";
   position: fixed;
@@ -78,7 +70,6 @@ body::after {
 }
 
 /* --- COMPONENTS --- */
-
 .glass-panel {
   background: var(--glass-bg);
   backdrop-filter: var(--glass-blur);
@@ -90,14 +81,14 @@ body::after {
 }
 
 .glass-panel:hover {
-  border: 1px solid rgba(var(--port-sky-rgb), 0.2);
+  border: 1px solid rgba(2, 179, 233, 0.2);
   background: rgba(255, 255, 255, 0.04);
 }
 
 .heading-glow {
-  font-family: var(--font-regina);
+  font-family: var(--font-orbitron);
   text-transform: uppercase;
-  letter-spacing: -0.02em;
+  letter-spacing: 0.05em;
 }
 
 /* --- SCROLLBAR --- */
@@ -106,14 +97,15 @@ body::after {
 }
 
 ::-webkit-scrollbar-track {
-  background: var(--surface-dark);
+  background: var(--color-surface-dark);
 }
 
 ::-webkit-scrollbar-thumb {
-  background: var(--earth);
+  background: var(--color-earth);
   border-radius: 20px;
 }
 
+/* --- CUSTOM FONTS --- */
 @font-face {
   font-family: "Regina";
   src: url("/fonts/Regina-Regular.woff2") format("woff2");
