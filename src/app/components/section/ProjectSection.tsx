@@ -3,167 +3,318 @@
 import React, { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import Image from "next/image";
-import { ChevronDown, ExternalLink, Github, Sprout } from "lucide-react";
+import {
+    ExternalLink,
+    Github,
+    Info,
+    X,
+    ChevronDown,
+    ChevronUp,
+    Database,
+    Globe,
+    Zap,
+} from "lucide-react";
+import { MagneticButton } from "../ui/MagneticButton";
 
 const projects = [
     {
         title: "SproutNova",
-        desc: "A production-grade Smart Farming Decision Support System. Features AI-powered disease detection, soil data analysis, and crop recommendations for Nigerian farmers.",
-        tech: ["Next.js", "TypeScript", "Zustand", "Tailwind"],
-        image: "/images/sproutnova.png", // Ensure you have this image
+        type: "Agri-Tech Decision Support",
+        desc: "Decision Support System for Nigerian agriculture featuring AI disease detection.",
+        tech: ["Next.js", "TypeScript", "Zustand", "AI"],
+        challenge: "Optimizing AI detection for low-bandwidth rural connections.",
+        solution: "Client-side image compression reduced server round-trips by 60%.",
+        image: "/images/sproutnova.png",
         live: "#",
         github: "#",
         featured: true,
     },
     {
-        title: "TLH School Management System",
-        desc: "A comprehensive dashboard for managing students, grades, and school administrative tasks with real-time data visualization via D3.js and Chart.js.",
-        tech: ["Next.js", "D3.js", "Chart.js", "Tailwind"],
-        image: "/images/project1.png",
+        title: "TLH School Management",
+        type: "FullStack SaaS",
+        desc: "Robust school system handling student data, grading, and administrative workflows.",
+        tech: ["Docker", "PostgreSQL", "Next.js", "D3.js"],
+        challenge: "Architecting a secure, containerized environment for complex relational data.",
+        solution: "Optimized PostgreSQL indexing and Dockerized microservices for high availability.",
+        image: "/images/tlh.png",
         live: "#",
         github: "#",
         featured: true,
     },
     {
-        title: "Anonymous Crime Reporting",
-        desc: "A secure, privacy-focused application allowing users to report incidents anonymously with location detection and image uploads.",
-        tech: ["React", "TypeScript", "Prisma", "Next.js"],
-        image: "/images/project2.png",
-        live: "#",
+        title: "Faydoh",
+        type: "FullStack Inheritance",
+        desc: "Precise mathematical engine for calculating Islamic inheritance distributions.",
+        tech: ["Next.js", "PostgreSQL", "Tailwind", "Math.js"],
+        challenge: "Translating intricate inheritance laws into a bug-free computational engine.",
+        solution: "Recursive calculation algorithm with comprehensive unit testing for accuracy.",
+        image: "/images/faydoh.png",
+        live: "https://faydoh.com/",
         github: "#",
         featured: true,
     },
     {
-        title: "Bright Crypto Tracker",
-        desc: "A real-time cryptocurrency tracking app featuring live price updates, market trends, and historical data charts using Redux Toolkit.",
-        tech: ["React", "Redux Toolkit", "React Query", "Tailwind"],
-        image: "/images/project3.png",
+        title: "Anonymous Crime Report",
+        type: "FullStack Privacy",
+        desc: "Privacy-focused application for secure, location-aware incident reporting.",
+        tech: ["Neon", "PostgreSQL", "Next.js", "Prisma"],
+        challenge: "Ensuring end-to-end anonymity while preventing spam via location verification.",
+        solution: "Utilized Neon serverless DB and Prisma for type-safe, trace-free data handling.",
+        image: "/images/crime.png",
         live: "#",
         github: "#",
         featured: false,
     },
     {
-        title: "ADI Digital Skills Platform",
-        desc: "An educational platform designed for Africa Digital Institute to teach digital skills to thousands of students across the continent.",
-        tech: ["Next.js", "Tailwind", "Framer Motion"],
+        title: "Pyvotale Hub",
+        type: "Product & Dev Hub",
+        desc: "Dynamic platform for software engineering and product lifecycle management.",
+        tech: ["Next.js", "REST API", "Framer Motion"],
+        challenge: "Syncing large data streams between hub and external product APIs.",
+        solution: "Implemented React Query for real-time updates and state persistence.",
+        image: "/images/pyvotale.png",
+        live: "#",
+        github: "#",
+        featured: false,
+    },
+    {
+        title: "Xerv",
+        type: "FinTech UI",
+        desc: "High-performance frontend implementation for a modern financial technology platform.",
+        tech: ["React", "Netlify", "Tailwind", "Framer Motion"],
+        challenge: "Translating complex financial dashboards into a fluid, 60fps user interface.",
+        solution: "Advanced CSS architecture and animation specs optimized for mobile performance.",
+        image: "/images/xerv.png",
+        live: "https://Xerv.netlify.app",
+        github: "#",
+        featured: false,
+    },
+
+    {
+        title: "Bright Crypto Tracker",
+        latency: "8ms",
+        desc: "Real-time crypto asset tracker with live market trends and historical charts.",
+        tech: ["Redux", "React Query", "Tailwind"],
+        challenge: "Syncing multiple API streams with high-frequency updates.",
+        solution: "Used React Query for smart caching and background polling to keep data fresh without overloading the client.",
         image: "/images/project4.png",
         live: "#",
         github: "#",
         featured: false,
-    },
-    {
-        title: "LAB Foundation NGO",
-        desc: "A non-governmental organization web portal featuring a blog system, event tracking, and donation integration.",
-        tech: ["Next.js", "JavaScript", "CSS"],
-        image: "/images/project6.png",
-        live: "#",
-        github: "#",
-        featured: false,
-    },
+    }
 ];
 
 const ProjectsSection = () => {
+    const [selectedProject, setSelectedProject] = useState<any>(null);
     const [showAll, setShowAll] = useState(false);
+    const [mouse, setMouse] = useState({ x: 0, y: 0 });
+
     const visibleProjects = showAll ? projects : projects.filter(p => p.featured);
 
     return (
-        <section className="relative py-24 px-6 bg-[#050505] flex flex-col items-center overflow-hidden">
+        <section
+            onMouseMove={(e) =>
+                setMouse({
+                    x: e.clientX,
+                    y: e.clientY,
+                })
+            }
+            className="relative py-32 px-6 bg-[#050505] flex flex-col items-center overflow-hidden"
+        >
 
-            {/* Background Ambient Glow */}
-            <div className="absolute top-[20%] left-[-10%] w-[40vw] h-[40vw] bg-port-sky/5 rounded-full blur-[120px] pointer-events-none" />
+            {/* 🔥 Dynamic Cursor Light */}
+            <div
+                className="pointer-events-none absolute inset-0 z-0"
+                style={{
+                    background: `radial-gradient(circle at ${mouse.x}px ${mouse.y}px, rgba(56,189,248,0.12), transparent 40%)`,
+                }}
+            />
 
-            {/* Section Label */}
-            <span className="text-port-sky text-sm tracking-[0.4em] uppercase mb-4 font-medium">
-                Selected Works
-            </span>
+            {/* Grid Lines */}
+            {/* <div className="absolute inset-0 opacity-[0.05] bg-[linear-gradient(to_right,white_1px,transparent_1px),linear-gradient(to_bottom,white_1px,transparent_1px)] bg-[size:60px_60px]" /> */}
 
-            {/* Heading */}
-            <h2 className="text-4xl md:text-7xl font-bold text-white mb-10 tracking-tighter">
-                Featured Projects
-            </h2>
+            {/* Glow Blobs */}
+            <div className="absolute -top-[10%] -right-[10%] w-[50vw] h-[50vw] bg-purple-600/20 rounded-full blur-[120px]" />
+            <div className="absolute -bottom-[10%] -left-[10%] w-[40vw] h-[40vw] bg-pink-600/20 rounded-full blur-[120px]" />
 
-            {/* Projects Grid */}
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 w-full max-w-6xl">
-                <AnimatePresence mode="wait">
-                    {visibleProjects.map((project, idx) => (
-                        <motion.div
-                            key={project.title}
-                            initial={{ opacity: 0, y: 30 }}
-                            animate={{ opacity: 1, y: 0 }}
-                            exit={{ opacity: 0, scale: 0.95 }}
-                            transition={{ duration: 0.5, delay: idx * 0.1 }}
-                            whileHover={{ y: -12 }}
-                            className="group relative rounded-2xl overflow-hidden border border-white/5 bg-white/[0.01] backdrop-blur-xl transition-all duration-500 hover:border-port-sky/30"
-                        >
-                            <div className="relative w-full h-56 overflow-hidden">
-                                <Image
-                                    src={project.image}
-                                    alt={project.title}
-                                    fill
-                                    className="object-cover group-hover:scale-110 transition-transform duration-700"
+            <div className="relative z-10 w-[90%] lg:w-[80%] max-w-[1200px] flex flex-col items-center">
+
+                <span className="text-port-sky text-[10px] tracking-[0.5em] uppercase mb-4 font-bold">
+                    Selected Works
+                </span>
+
+                <h2 className="text-4xl md:text-6xl font-bold text-white mb-20 tracking-tight">
+                    Featured Projects
+                </h2>
+
+                {/* GRID */}
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 w-full">
+                    <AnimatePresence>
+                        {visibleProjects.map((project, idx) => (
+                            <motion.div
+                                key={project.title}
+                                initial={{ opacity: 0, y: 40 }}
+                                animate={{ opacity: 1, y: 0 }}
+                                transition={{ delay: idx * 0.1 }}
+                                whileHover={{ scale: 1.03 }}
+                                className="group relative rounded-2xl overflow-hidden border border-white/10 bg-white/[0.02] backdrop-blur-xl transition-all duration-500"
+                            >
+
+                                {/* 3D Tilt Effect */}
+                                <motion.div
+                                    className="absolute inset-0 z-10"
+                                    whileHover={{
+                                        rotateX: 5,
+                                        rotateY: -5,
+                                    }}
                                 />
-                                {/* Special Tag for SproutNova */}
-                                {project.title === "SproutNova" && (
-                                    <div className="absolute top-4 right-4 z-20 px-3 py-1 bg-green-500/20 border border-green-500/30 backdrop-blur-md rounded-full flex items-center gap-2">
-                                        <Sprout size={12} className="text-green-400" />
-                                        <span className="text-[10px] text-green-400 font-bold uppercase tracking-widest">Agri-Tech</span>
+
+                                {/* Image */}
+                                <div className="relative h-48 overflow-hidden">
+                                    <Image
+                                        src={project.image}
+                                        alt={project.title}
+                                        fill
+                                        className="object-cover group-hover:scale-110 transition duration-700"
+                                    />
+                                    <div className="absolute inset-0 bg-black/40 group-hover:bg-black/20 transition" />
+                                </div>
+
+                                {/* Content */}
+                                <div className="p-6 space-y-4">
+                                    <p className="text-[9px] text-port-sky uppercase tracking-widest">
+                                        {project.type}
+                                    </p>
+
+                                    <h3 className="text-xl font-bold text-white">
+                                        {project.title}
+                                    </h3>
+
+                                    <p className="text-sm text-white/40 line-clamp-3">
+                                        {project.desc}
+                                    </p>
+
+                                    {/* Tech */}
+                                    <div className="flex flex-wrap gap-2">
+                                        {project.tech.map((t) => (
+                                            <span
+                                                key={t}
+                                                className="text-[10px] px-2 py-1 bg-white/5 rounded border border-white/10 text-white/40"
+                                            >
+                                                {t}
+                                            </span>
+                                        ))}
                                     </div>
-                                )}
-                                <div className="absolute inset-0 bg-black/40 group-hover:bg-black/10 transition-all duration-500" />
-                            </div>
 
-                            <div className="p-8 flex flex-col gap-5">
-                                <h3 className="text-2xl font-bold text-white tracking-tight">
-                                    {project.title}
-                                </h3>
-                                <p className="text-sm text-white/40 leading-relaxed font-light font-sans">
-                                    {project.desc}
-                                </p>
+                                    {/* Buttons */}
+                                    <div className="flex justify-between items-center pt-5 border-t border-white/10">
 
-                                <div className="flex flex-wrap gap-2 mt-2">
-                                    {project.tech.map((tech, i) => (
-                                        <span key={i} className="text-[10px] uppercase tracking-widest px-3 py-1 rounded-full bg-white/5 border border-white/5 text-white/50">
-                                            {tech}
-                                        </span>
-                                    ))}
+                                        <div className="flex gap-4">
+
+                                            {/* LIVE BUTTON */}
+                                            <MagneticButton>
+                                                <a
+                                                    href={project.live}
+                                                    target="_blank"
+                                                    className="group/icon relative w-11 h-11 flex items-center justify-center rounded-xl border border-white/10 bg-white/10 text-port-sky 
+        hover:bg-port-sky hover:text-white hover:border-port-sky/50 hover:shadow-[0_0_20px_rgba(2,179,233,0.3)]
+        transition-all duration-300 cursor-pointer overflow-hidden"
+                                                >
+                                                    <ExternalLink size={18} className="relative z-10" />
+                                                    {/* Subtle inner glow sweep */}
+                                                    <div className="absolute inset-0 bg-gradient-to-tr from-white/10 to-transparent opacity-0 group-hover/icon:opacity-100 transition-opacity" />
+                                                </a>
+                                            </MagneticButton>
+
+                                            {/* GITHUB BUTTON */}
+                                            <MagneticButton>
+                                                <a
+                                                    href={project.github}
+                                                    target="_blank"
+                                                    className="group/icon relative w-11 h-11 flex items-center justify-center rounded-xl border border-white/10 bg-white/10 text-white/50 
+        hover:bg-white hover:text-black hover:border-white/50 hover:shadow-[0_0_20px_rgba(255,255,255,0.2)]
+        transition-all duration-300 cursor-pointer overflow-hidden"
+                                                >
+                                                    <Github size={18} className="relative z-10" />
+                                                    <div className="absolute inset-0 bg-gradient-to-tr from-white/20 to-transparent opacity-0 group-hover/icon:opacity-100 transition-opacity" />
+                                                </a>
+                                            </MagneticButton>
+
+                                        </div>
+
+                                        {/* CASE STUDY BUTTON */}
+                                        <button
+                                            onClick={() => setSelectedProject(project)}
+                                            className="group/case text-[10px] font-bold uppercase tracking-widest text-white/30 hover:text-port-sky cursor-pointer flex items-center gap-2 transition-all duration-300"
+                                        >
+                                            <Info size={14} className="group-hover/case:scale-110 transition-transform" />
+                                            Case Study
+                                        </button>
+
+                                    </div>
                                 </div>
 
-                                <div className="flex gap-6 mt-6 pt-4 border-t border-white/5">
-                                    <a href={project.live} target="_blank" className="flex items-center gap-2 text-xs font-bold text-port-sky hover:text-white transition-colors uppercase tracking-widest">
-                                        <ExternalLink size={14} /> Live
-                                    </a>
-                                    <a href={project.github} target="_blank" className="flex items-center gap-2 text-xs font-bold text-white/40 hover:text-white transition-colors uppercase tracking-widest">
-                                        <Github size={14} /> Source
-                                    </a>
-                                </div>
-                            </div>
-                        </motion.div>
-                    ))}
-                </AnimatePresence>
-            </div>
+                                {/* Glow Sweep */}
+                                <div className="absolute inset-0 opacity-0 group-hover:opacity-100 bg-[linear-gradient(120deg,transparent,rgba(56,189,248,0.15),transparent)] transition duration-500 pointer-events-none" />
+                            </motion.div>
+                        ))}
+                    </AnimatePresence>
+                </div>
 
-            {/* Reveal More Button */}
-            {!showAll && (
-                <motion.button
-                    onClick={() => setShowAll(true)}
-                    className="mt-20 flex flex-col items-center gap-4 group cursor-pointer"
+                {/* Toggle */}
+                <button
+                    onClick={() => setShowAll(!showAll)}
+                    className="mt-20 flex flex-col items-center gap-3 group"
                 >
-                    <span className="text-xs uppercase tracking-[0.5em] text-white/40 group-hover:text-port-sky transition-colors font-bold">
-                        View More Projects
+                    <span className="text-xs tracking-widest text-white/30 group-hover:text-port-sky">
+                        {showAll ? "View Less" : "View More"}
                     </span>
-                    <motion.div
-                        animate={{ y: [0, 8, 0] }}
-                        transition={{ duration: 2, repeat: Infinity }}
-                        className="w-12 h-12 rounded-full border border-white/10 flex items-center justify-center text-port-sky group-hover:border-port-sky transition-all"
-                    >
-                        <ChevronDown size={20} />
-                    </motion.div>
-                </motion.button>
-            )}
 
-            {/* Section Indicator */}
-            <div className="mt-32 w-14 h-14 rounded-full border border-white/5 flex items-center justify-center text-white/10 text-[10px] font-bold tracking-widest">
-                03
+                    <motion.div
+                        animate={{ y: [0, 6, 0] }}
+                        transition={{ repeat: Infinity, duration: 1.5 }}
+                        className="w-10 h-10 rounded-full border border-white/10 flex items-center justify-center text-port-sky"
+                    >
+                        {showAll ? <ChevronUp /> : <ChevronDown />}
+                    </motion.div>
+                </button>
+
+                {/* Drawer */}
+                <AnimatePresence>
+                    {selectedProject && (
+                        <>
+                            <motion.div
+                                className="fixed inset-0 bg-black/90 z-50"
+                                onClick={() => setSelectedProject(null)}
+                            />
+                            <motion.div
+                                initial={{ x: "100%" }}
+                                animate={{ x: 0 }}
+                                exit={{ x: "100%" }}
+                                className="fixed right-0 top-0 h-full w-full md:w-[480px] bg-[#080808] z-50 p-10"
+                            >
+                                <button
+                                    onClick={() => setSelectedProject(null)}
+                                    className="absolute top-6 right-6"
+                                >
+                                    <X />
+                                </button>
+
+                                <h2 className="text-3xl text-white mb-6">
+                                    {selectedProject.title}
+                                </h2>
+
+                                <p className="text-white/40 mb-4">
+                                    {selectedProject.challenge}
+                                </p>
+                                <p className="text-white/40">
+                                    {selectedProject.solution}
+                                </p>
+                            </motion.div>
+                        </>
+                    )}
+                </AnimatePresence>
+
             </div>
         </section>
     );
