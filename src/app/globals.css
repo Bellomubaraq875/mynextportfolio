@@ -1,11 +1,9 @@
 @import "tailwindcss";
-@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400..900&display=swap');
 
 @theme {
   /* --- Fonts --- */
-  --font-regina: "Regina", serif;
-  --font-orbitron: "Orbitron", sans-serif;
   --font-sans: var(--font-jost), "Inter", system-ui, sans-serif;
+  --font-serif: var(--font-jost), sans-serif; /* Fallback to Jost */
 
   /* --- Colors --- */
   --color-port-yellow: #f5d456;
@@ -14,9 +12,8 @@
   --color-earth: #a0937d;
   --color-surface-dark: #0f0f16;
 
-  /* --- RGB Variants (for opacity control in Tailwind) --- */
-  --color-port-sky-rgb: 2, 179, 233;
-  --color-port-yellow-rgb: 245, 212, 86;
+  /* --- Custom Animations --- */
+  --animate-pulse-slow: pulse 4s cubic-bezier(0.4, 0, 0.6, 1) infinite;
 }
 
 /* -----------------------------
@@ -41,7 +38,6 @@ body {
   background-color: var(--color-surface-dark);
   font-family: var(--font-sans);
   line-height: 1.6;
-  overflow-x: hidden;
 }
 
 /* --- THE GLOBAL AMBIENT GLOW --- */
@@ -80,35 +76,21 @@ body::after {
   transition: all 0.4s ease;
 }
 
-.glass-panel:hover {
-  border: 1px solid rgba(2, 179, 233, 0.2);
-  background: rgba(255, 255, 255, 0.04);
-}
-
+/* All headings now inherit the clean Jost look */
 .heading-glow {
-  font-family: var(--font-orbitron);
-  text-transform: uppercase;
-  letter-spacing: 0.05em;
+  font-family: var(--font-sans);
+  font-weight: 700;
+  letter-spacing: -0.04em;
 }
 
 /* --- SCROLLBAR --- */
 ::-webkit-scrollbar {
   width: 5px;
 }
-
 ::-webkit-scrollbar-track {
   background: var(--color-surface-dark);
 }
-
 ::-webkit-scrollbar-thumb {
   background: var(--color-earth);
   border-radius: 20px;
-}
-
-/* --- CUSTOM FONTS --- */
-@font-face {
-  font-family: "Regina";
-  src: url("/fonts/Regina-Regular.woff2") format("woff2");
-  font-weight: 400;
-  font-display: swap;
 }

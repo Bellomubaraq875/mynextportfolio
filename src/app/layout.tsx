@@ -1,20 +1,13 @@
 import type { Metadata } from "next";
-import { Jost, Orbitron } from "next/font/google";
+import { Jost } from "next/font/google";
 import "./globals.css";
 import Header from "./components/layout/Header";
 import Footer from "./components/layout/Footer";
 
 const jost = Jost({
   subsets: ["latin"],
-  weight: ["400", "500", "600", "700"],
+  weight: ["300", "400", "500", "600", "700"], // Added 300 for that extra light elegant look
   variable: "--font-jost",
-  display: "swap",
-});
-
-const orbitron = Orbitron({
-  subsets: ["latin"],
-  weight: ["400", "700"],
-  variable: "--font-orbitron",
   display: "swap",
 });
 
@@ -23,21 +16,23 @@ export const metadata: Metadata = {
   description: "Portfolio of Mubarak Bello, a Frontend Developer specialized in sleek UI/UX.",
   icons: {
     icon: "/logo/favicon.png",
-    shortcut: "/logo/favicon.png",
-    apple: "/logo/favicon.png",
   },
 };
 
-export default function RootLayout({ children }: { children: React.ReactNode }) {
+export default function RootLayout({
+  children,
+}: {
+  children: React.ReactNode;
+}) {
   return (
     <html
       lang="en"
-      className={`${jost.variable} ${orbitron.variable} scroll-smooth bg-[#0a0a0a]`}
+      className={`${jost.variable} scroll-smooth`}
       suppressHydrationWarning
     >
-      <body className="font-sans antialiased bg-[#0a0a0a] text-white selection:bg-port-sky/30 selection:text-port-sky">
+      <body className="bg-[#0a0a0a] text-white font-sans antialiased selection:bg-port-sky/30">
         <Header />
-        <main>{children}</main>
+        <main className="min-h-screen">{children}</main>
         <Footer />
       </body>
     </html>
