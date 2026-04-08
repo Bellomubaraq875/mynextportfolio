@@ -3,7 +3,7 @@
 import AboutSection from "./components/section/AboutSection";
 import ContactSection from "./components/section/ContactSection";
 import ExperienceSection from "./components/section/ExperienceSection";
-import Hero from "./components/section/Herosection";
+import HeroSection from "./components/section/HeroSection";
 import ProjectsSection from "./components/section/ProjectSection";
 import SkillsSection from "./components/section/SkillSection";
 
@@ -11,13 +11,14 @@ import SkillsSection from "./components/section/SkillSection";
 export default function HomePage() {
   return (
     <>
-      <Hero />
+      {/* <HeroSection/> */}
+      <HeroSection/>
       <AboutSection/>
       <ProjectsSection/>
       <ExperienceSection/>
       <SkillsSection/>
       <ContactSection/>
-      
+
     </>
   );
 }
