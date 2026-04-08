@@ -11,72 +11,86 @@ interface SkillProps {
     x: string;
     y: string;
     size: string;
+    color: string; 
 }
 
-const SkillBubble = ({ name, icon, level, years, x, y, size }: SkillProps) => {
+const SkillBubble = ({ name, icon, level, years, x, y, size, color }: SkillProps) => {
     const [isHovered, setIsHovered] = useState(false);
 
     return (
         <motion.div
-            className="absolute flex items-center justify-center cursor-pointer group"
-            style={{ top: y, left: x, width: size, height: size }}
-            animate={{
-                y: [0, -15, 0],
+            className="absolute flex items-center justify-center cursor-pointer"
+            style={{
+                top: y,
+                left: x,
+                width: size,
+                height: size,
+                zIndex: isHovered ? 50 : 10
             }}
+            animate={{ y: [0, -20, 0], x: [0, 5, 0] }}
             transition={{
-                duration: 4 + Math.random() * 2,
+                duration: 6 + Math.random() * 2,
                 repeat: Infinity,
-                ease: "easeInOut",
+                ease: "easeInOut"
             }}
             onMouseEnter={() => setIsHovered(true)}
             onMouseLeave={() => setIsHovered(false)}
         >
-            {/* The Bubble Body */}
-            <div className="relative w-full h-full rounded-full border border-white/10 bg-white/5 backdrop-blur-md flex items-center justify-center transition-all duration-500 group-hover:border-port-sky group-hover:bg-port-sky/10 group-hover:shadow-[0_0_40px_rgba(2,179,233,0.3)]">
-                <div className="text-white/40 group-hover:text-white transition-colors duration-500 scale-[1.5]">
+            {/* Bubble with Dynamic Color Glow */}
+            <div
+                className="relative w-full h-full rounded-full border border-white/5 bg-white/[0.03] backdrop-blur-xl flex items-center justify-center transition-all duration-700 group"
+                style={{
+                    borderColor: isHovered ? color : "rgba(255,255,255,0.05)",
+                    boxShadow: isHovered ? `0 0 40px ${color}33` : "none"
+                }}
+            >
+                <div
+                    className="transition-all duration-500 scale-[1.4] md:scale-[1.7]"
+                    style={{ color: isHovered ? color : "rgba(255,255,255,0.3)" }}
+                >
                     {icon}
                 </div>
 
-                {/* Specular Highlight (The "Light" hit) */}
-                <div className="absolute top-[15%] left-[20%] w-[20%] h-[20%] bg-white/20 rounded-full blur-[2px]" />
+                {/* Specular light hit */}
+                <div className="absolute top-[15%] left-[20%] w-[25%] h-[25%] bg-white/10 rounded-full blur-[4px]" />
             </div>
 
-            {/* Hover Info Panel (Tooltip) */}
             <AnimatePresence>
                 {isHovered && (
                     <motion.div
-                        initial={{ opacity: 0, y: 10, scale: 0.9 }}
-                        animate={{ opacity: 1, y: -20, scale: 1 }}
+                        initial={{ opacity: 0, y: 15, scale: 0.9 }}
+                        animate={{ opacity: 1, y: -30, scale: 1 }}
                         exit={{ opacity: 0, scale: 0.9 }}
-                        className="absolute bottom-full mb-4 z-50 w-48 p-4 bg-black/60 backdrop-blur-xl border border-white/10 rounded-xl pointer-events-none"
+                        className="absolute bottom-full mb-2 w-44 p-5 bg-black/90 backdrop-blur-2xl border border-white/10 rounded-2xl pointer-events-none shadow-2xl"
                     >
-                        <p className="text-[10px] uppercase tracking-widest text-port-sky font-bold mb-3">{name}</p>
-
-                        <div className="space-y-3">
+                        <p className="text-[10px] font-black uppercase tracking-[0.2em] mb-4" style={{ color: color }}>
+                            {name}
+                        </p>
+                        <div className="space-y-4">
                             <div>
-                                <div className="flex justify-between text-[8px] text-white/50 mb-1 font-bold uppercase">
+                                <div className="flex justify-between text-[8px] text-white/40 mb-1.5 font-bold uppercase tracking-widest">
                                     <span>Proficiency</span>
                                     <span>{level}%</span>
                                 </div>
-                                <div className="h-1 w-full bg-white/10 rounded-full overflow-hidden">
+                                <div className="h-1 w-full bg-white/5 rounded-full overflow-hidden">
                                     <motion.div
                                         initial={{ width: 0 }}
                                         animate={{ width: `${level}%` }}
-                                        className="h-full bg-gradient-to-r from-port-sky to-purple-500"
+                                        className="h-full"
+                                        style={{ backgroundColor: color }}
                                     />
                                 </div>
                             </div>
-
                             <div>
-                                <div className="flex justify-between text-[8px] text-white/50 mb-1 font-bold uppercase">
-                                    <span>Experience</span>
-                                    <span>{years} Yrs</span>
+                                <div className="flex justify-between text-[8px] text-white/40 mb-1.5 font-bold uppercase tracking-widest">
+                                    <span>Exp</span>
+                                    <span>{years} Years</span>
                                 </div>
-                                <div className="h-1 w-full bg-white/10 rounded-full overflow-hidden">
+                                <div className="h-1 w-full bg-white/5 rounded-full overflow-hidden">
                                     <motion.div
                                         initial={{ width: 0 }}
-                                        animate={{ width: `${(years / 5) * 100}%` }}
-                                        className="h-full bg-port-sky"
+                                        animate={{ width: `${(years / 6) * 100}%` }}
+                                        className="h-full bg-white/20"
                                     />
                                 </div>
                             </div>
@@ -84,10 +98,6 @@ const SkillBubble = ({ name, icon, level, years, x, y, size }: SkillProps) => {
                     </motion.div>
                 )}
             </AnimatePresence>
-
-            <span className="absolute -bottom-8 text-[10px] text-white/20 uppercase tracking-widest font-bold group-hover:text-white transition-colors">
-                {name}
-            </span>
         </motion.div>
     );
 };
