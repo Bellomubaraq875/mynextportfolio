@@ -3,10 +3,11 @@ import { Jost } from "next/font/google";
 import "./globals.css";
 import Header from "./components/layout/Header";
 import Footer from "./components/layout/Footer";
+import { Providers } from "../lib/providers"; 
 
 const jost = Jost({
   subsets: ["latin"],
-  weight: ["300", "400", "500", "600", "700"], // Added 300 for that extra light elegant look
+  weight: ["300", "400", "500", "600", "700"],
   variable: "--font-jost",
   display: "swap",
 });
@@ -31,9 +32,12 @@ export default function RootLayout({
       suppressHydrationWarning
     >
       <body className="bg-[#0a0a0a] text-white font-sans antialiased selection:bg-port-sky/30">
-        <Header />
-        <main className="min-h-screen">{children}</main>
-        <Footer />
+        {/* Use the Client Component wrapper here */}
+        <Providers>
+          <Header />
+          <main className="min-h-screen">{children}</main>
+          <Footer />
+        </Providers>
       </body>
     </html>
   );

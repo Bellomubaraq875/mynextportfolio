@@ -8,6 +8,7 @@
     "start": "next start"
   },
   "dependencies": {
+    "@formspree/react": "^3.0.0",
     "chart.js": "^4.5.1",
     "dompurify": "^3.3.1",
     "framer-motion": "^12.38.0",
