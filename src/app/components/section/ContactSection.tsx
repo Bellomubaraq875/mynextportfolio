@@ -13,6 +13,7 @@ const ContactSection = () => {
 
     return (
         <section
+            id="contact"
             onMouseMove={(e) => setMouse({ x: e.clientX, y: e.clientY })}
             className="relative py-32 px-6 bg-[#050505] flex flex-col items-center overflow-hidden"
         >

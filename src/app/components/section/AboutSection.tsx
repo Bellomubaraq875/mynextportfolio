@@ -31,7 +31,7 @@ const AboutSection = () => {
     ];
 
     return (
-        <section
+        <section id="about"
             onMouseMove={(e) => setMouse({ x: e.clientX, y: e.clientY })}
             className="relative py-32 px-6 flex flex-col items-center bg-[#050505] overflow-hidden"
         >

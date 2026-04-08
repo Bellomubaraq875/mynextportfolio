@@ -11,6 +11,7 @@ const HeroSection = () => {
 
     return (
         <section
+            id="home"
             onMouseMove={(e) => setMouse({ x: e.clientX, y: e.clientY })}
             className="relative min-h-screen flex items-center justify-center px-6 bg-[#050505] overflow-hidden pt-10 mt-10"
         >
@@ -78,7 +79,7 @@ const HeroSection = () => {
                         animate={{ opacity: 1, y: 0 }}
                         transition={{ delay: 0.1 }}
                     >
-                        <h1 className="text-4xl md:text-6xl lg:text-9xl font-bold text-white tracking-tighter leading-[0.85] mb-8">
+                        <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold text-white tracking-tighter leading-[0.85] mb-8">
                             Mubarak <br />
                             <span className="text-port-sky italic">Adeyemi.</span>
                         </h1>
@@ -125,7 +126,7 @@ const HeroSection = () => {
                     className="relative order-1 lg:order-2 flex justify-center lg:justify-end"
                 >
                     {/* Glass Card Composition */}
-                    <div className="relative w-[300px] h-[400px] md:w-[400px] md:h-[500px] group">
+                    <div className="relative w-[300px] h-[350px] md:w-[400px] md:h-[500px] group">
                         {/* The "Shield" / Focal Card */}
                         <div className="absolute inset-0 rounded-[3rem] border border-white/10 bg-white/[0.02] backdrop-blur-2xl rotate-[-6deg] transition-all duration-700 group-hover:rotate-0 group-hover:border-port-sky/30">
                             {/* Inner wavy texture inside card */}
@@ -151,7 +152,7 @@ const HeroSection = () => {
                         <motion.div
                             animate={{ y: [0, -20, 0] }}
                             transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
-                            className="absolute -top-12 -right-12 w-48 h-48 rounded-[2.5rem] border border-white/10 bg-white/[0.03] backdrop-blur-3xl flex items-center justify-center rotate-12 overflow-hidden shadow-2xl shadow-port-sky/10"
+                            className="absolute -top-12 -right-12 w-38 h-38 rounded-[2.5rem] border border-white/10 bg-white/[0.03] backdrop-blur-3xl flex items-center justify-center rotate-12 overflow-hidden shadow-2xl shadow-port-sky/10"
                         >
                             {/* The Workspace Vignette */}
                             <Image

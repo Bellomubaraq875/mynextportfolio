@@ -36,7 +36,7 @@ const projects = [
         tech: ["Docker", "PostgreSQL", "Next.js", "D3.js"],
         challenge: "Architecting a secure, containerized environment for complex relational data.",
         solution: "Optimized PostgreSQL indexing and Dockerized microservices for high availability.",
-        image: "/images/tlh.png",
+        image: "/images/LMS-tlh.png",
         live: "#",
         github: "#",
         featured: true,
@@ -60,7 +60,7 @@ const projects = [
         tech: ["Neon", "PostgreSQL", "Next.js", "Prisma"],
         challenge: "Ensuring end-to-end anonymity while preventing spam via location verification.",
         solution: "Utilized Neon serverless DB and Prisma for type-safe, trace-free data handling.",
-        image: "/images/crime.png",
+        image: "/images/crime-report.jpg",
         live: "#",
         github: "#",
         featured: false,
@@ -113,6 +113,7 @@ const ProjectsSection = () => {
 
     return (
         <section
+            id="projects"
             onMouseMove={(e) =>
                 setMouse({
                     x: e.clientX,

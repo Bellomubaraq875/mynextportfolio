@@ -31,6 +31,7 @@ const SkillsSection = () => {
 
     return (
         <section
+            id="skill"
             onMouseMove={(e) => setMouse({ x: e.clientX, y: e.clientY })}
             className="relative w-full min-h-screen bg-[#050505] flex flex-col items-center overflow-hidden py-32"
         >

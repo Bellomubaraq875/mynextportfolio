@@ -33,7 +33,7 @@ const experiences = [
 
 const ExperienceSection = () => {
     return (
-        <section className="relative py-32 px-6 bg-[#0b000c] flex flex-col items-center overflow-hidden">
+        <section id = "experience" className="relative py-32 px-6 bg-[#0b000c] flex flex-col items-center overflow-hidden">
 
             {/* 🔥 ENHANCED BACKGROUND (NO GRID, MORE LIGHT) */}
             <div className="absolute inset-0 z-0 pointer-events-none">
