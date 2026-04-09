@@ -1,5 +1,3 @@
-// app/page.tsx
-
 import AboutSection from "./components/section/AboutSection";
 import ContactSection from "./components/section/ContactSection";
 import ExperienceSection from "./components/section/ExperienceSection";

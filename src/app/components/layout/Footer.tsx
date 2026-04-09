@@ -98,7 +98,7 @@ const Footer = () => {
 
         {/* COPYRIGHT AREA */}
         <div className="flex flex-col md:flex-row justify-between items-center gap-6 pt-10 border-t border-white/5 text-[10px] uppercase tracking-widest font-bold text-white/20">
-          <p>© {new Date().getFullYear()} BELLO MUBARACK ADEYEMI</p>
+          <p>© {new Date().getFullYear()} BELLO MUBARAK ADEYEMI</p>
           <div className="flex items-center gap-8">
             <span className="hover:text-white transition-colors cursor-default">Next.js 14</span>
             <span className="hover:text-white transition-colors cursor-default">Framer Motion</span>

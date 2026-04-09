@@ -3,7 +3,7 @@
 @theme {
   /* --- Fonts --- */
   --font-sans: var(--font-jost), "Inter", system-ui, sans-serif;
-  --font-serif: var(--font-jost), sans-serif; /* Fallback to Jost */
+  --font-serif: var(--font-jost), sans-serif; 
 
   /* --- Colors --- */
   --color-port-yellow: #f5d456;
@@ -38,6 +38,9 @@ body {
   background-color: var(--color-surface-dark);
   font-family: var(--font-sans);
   line-height: 1.6;
+}
+body {
+  @apply antialiased;
 }
 
 /* --- THE GLOBAL AMBIENT GLOW --- */
