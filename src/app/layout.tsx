@@ -32,7 +32,7 @@ export default function RootLayout({
       suppressHydrationWarning
     >
       <body className="bg-[#0a0a0a] text-white font-sans antialiased selection:bg-port-sky/30">
-        {/* Use the Client Component wrapper here */}
+        
         <Providers>
           <Header />
           <main className="min-h-screen">{children}</main>

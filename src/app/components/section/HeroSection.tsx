@@ -13,7 +13,7 @@ const HeroSection = () => {
         <section
             id="home"
             onMouseMove={(e) => setMouse({ x: e.clientX, y: e.clientY })}
-            className="relative min-h-screen flex items-center justify-center px-6 bg-[#050505] overflow-hidden pt-10 mt-10"
+            className="relative min-h-screen flex items-center justify-center px-6 bg-[#050505] overflow-hidden "
         >
             {/* 1. ATMOSPHERIC BACKGROUND SYSTEM */}
             <div className="absolute inset-0 z-0 pointer-events-none">

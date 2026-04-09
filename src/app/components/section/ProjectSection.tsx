@@ -26,7 +26,7 @@ const projects = [
         solution: "Client-side image compression reduced server round-trips by 60%.",
         image: "/images/sproutnova.png",
         live: "#",
-        github: "#",
+        github: "https://github.com/Bellomubaraq875/sproutnova",
         featured: true,
     },
     {
@@ -38,7 +38,7 @@ const projects = [
         solution: "Optimized PostgreSQL indexing and Dockerized microservices for high availability.",
         image: "/images/LMS-tlh.png",
         live: "#",
-        github: "#",
+        github: "https://github.com/Bellomubaraq87next-school-dashboard",
         featured: true,
     },
     {
@@ -50,7 +50,7 @@ const projects = [
         solution: "Recursive calculation algorithm with comprehensive unit testing for accuracy.",
         image: "/images/faydoh.png",
         live: "https://faydoh.com/",
-        github: "#",
+        // github: "#",
         featured: true,
     },
     {
@@ -62,7 +62,7 @@ const projects = [
         solution: "Utilized Neon serverless DB and Prisma for type-safe, trace-free data handling.",
         image: "/images/crime-report.jpg",
         live: "#",
-        github: "#",
+        github: "https://github.com/Bellomubaraq875/my-app",
         featured: false,
     },
     {
@@ -73,8 +73,8 @@ const projects = [
         challenge: "Syncing large data streams between hub and external product APIs.",
         solution: "Implemented React Query for real-time updates and state persistence.",
         image: "/images/pyvotale.png",
-        live: "#",
-        github: "#",
+        live: "https://pyvotalehub.netlify.app/",
+        // github: "#",
         featured: false,
     },
     {
@@ -86,7 +86,7 @@ const projects = [
         solution: "Advanced CSS architecture and animation specs optimized for mobile performance.",
         image: "/images/xerv.png",
         live: "https://Xerv.netlify.app",
-        github: "#",
+        // github: "#",
         featured: false,
     },
 
@@ -97,10 +97,34 @@ const projects = [
         tech: ["Redux", "React Query", "Tailwind"],
         challenge: "Syncing multiple API streams with high-frequency updates.",
         solution: "Used React Query for smart caching and background polling to keep data fresh without overloading the client.",
-        image: "/images/project4.png",
-        live: "#",
-        github: "#",
+        image: "/images/crypto.png",
+        live: "https://crypto-plum-phi.vercel.app/",
+        github: "https://github.com/Bellomubaraq875/crypto",
         featured: false,
+    },
+    {
+        "title": "LAB Foundation",
+        "type": "NGO / Community Platform",
+        "desc": "A digital hub for a non-governmental organization focused on community outreach and medical services in Ibadan.",
+        "tech": ["Next.js", "Tailwind CSS", "Framer Motion", "Contentful"],
+        "challenge": "Creating an engaging way to showcase humanitarian impact and blog updates for local outreach programs.",
+        "solution": "Implemented a dynamic CMS-driven blog and a sleek, responsive landing page with high-performance asset loading.",
+        "image": "/images/lab.png",
+        "live": "https://labfoundation.netlify.app/",
+        "github": "#",
+        "featured": false
+    },
+    {
+        "title": "Africa Digital Institute",
+        "type": "EdTech / Learning Management",
+        "desc": "A bi-lingual comprehensive platform designed to provide and manage digital skills training across the continent.",
+        "tech": ["React", "TypeScript", "Node.js", "Django"],
+        "challenge": "Developing a structured, scalable interface to manage diverse digital curricula and student tracking.",
+        "solution": "Built a robust component-driven dashboard and optimized relational data handling for student enrollments.",
+        "image": "/images/adi.png",
+        "live": "https://adifront.netlify.app/",
+        "github": "#",
+        "featured": false
     }
 ];
 
@@ -141,7 +165,7 @@ const ProjectsSection = () => {
             <div className="relative z-10 w-[90%] lg:w-[80%] max-w-[1200px] flex flex-col items-center">
 
                 <span className="text-port-sky text-[10px] tracking-[0.5em] uppercase mb-4 font-bold">
-                    Selected Works
+                    Selected Works /&gt;
                 </span>
 
                 <h2 className="text-4xl md:text-6xl font-bold text-white mb-20 tracking-tight">

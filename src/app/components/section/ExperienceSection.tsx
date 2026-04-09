@@ -61,7 +61,7 @@ const ExperienceSection = () => {
                     whileInView={{ opacity: 1 }}
                     className="text-port-sky text-[10px] tracking-[0.5em] uppercase mb-4 font-bold"
                 >
-                    Experience
+                    Experience /&gt;
                 </motion.span>
 
                 <h2 className="text-4xl md:text-6xl font-bold text-white mb-20 tracking-tight">
