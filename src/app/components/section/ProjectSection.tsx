@@ -99,7 +99,7 @@ const projects = [
         solution: "Implemented React Query for real-time updates and persistent state synchronization.",
         image: "/images/pyvotale.png",
         live: "https://pyvotalehub.netlify.app/",
-        github: "#", // Private Repo
+        github: "#", 
         featured: false,
     },
     {
@@ -111,7 +111,7 @@ const projects = [
         solution: "Engineered an advanced CSS-in-JS architecture and animation specs optimized for mobile browser performance.",
         image: "/images/xerv.png",
         live: "https://Xerv.netlify.app",
-        github: "#", // Private Repo
+        github: "#", 
         featured: false,
     },
     {

@@ -2,8 +2,8 @@
 
 import React, { useState } from "react";
 import { motion } from "framer-motion";
-import Image from "next/image"; 
-import { ArrowDownRight, Globe, Zap, MousePointer2 } from "lucide-react";
+import Image from "next/image";
+import { ArrowDownRight, Globe, Zap } from "lucide-react";
 import { MagneticButton } from "../ui/MagneticButton";
 
 const HeroSection = () => {
@@ -17,49 +17,57 @@ const HeroSection = () => {
         >
             {/* 1. ATMOSPHERIC BACKGROUND SYSTEM */}
             <div className="absolute inset-0 z-0 pointer-events-none">
+                {/* --- STARFIELD LAYER --- */}
+                <div className="absolute inset-0 z-0 opacity-30">
+                    <svg width="100%" height="100%" xmlns="http://www.w3.org/2000/svg">
+                        <defs>
+                            <pattern id="stars" x="0" y="0" width="100" height="100" patternUnits="userSpaceOnUse">
+                                <circle cx="10" cy="10" r="0.5" fill="white" />
+                                <circle cx="50" cy="80" r="0.7" fill="white" />
+                                <circle cx="90" cy="40" r="0.5" fill="white" />
+                                <rect x="30" y="30" width="1" height="1" fill="white">
+                                    <animate attributeName="opacity" values="0;1;0" dur="3s" repeatCount="indefinite" />
+                                </rect>
+                                <rect x="70" y="70" width="1" height="1" fill="white">
+                                    <animate attributeName="opacity" values="0;1;0" dur="5s" repeatCount="indefinite" />
+                                </rect>
+                            </pattern>
+                        </defs>
+                        <rect width="100%" height="100%" fill="url(#stars)" />
+                    </svg>
+                </div>
 
-                <div className="absolute inset-0 opacity-[0.05] text-white/10">
+                {/* --- WAVY LINES --- */}
+                <div className="absolute inset-0 opacity-[0.05] text-white/10 z-10">
                     <svg width="100%" height="100%" xmlns="http://www.w3.org/2000/svg">
                         <defs>
                             <pattern id="wavy-lines" patternUnits="userSpaceOnUse" width="100" height="200" viewBox="0 0 100 200">
-                                <path
-                                    d="M0 50 C 30 0, 70 0, 100 50 C 130 100, 170 100, 200 50"
-                                    stroke="currentColor"
-                                    strokeWidth="0.5"
-                                    fill="none"
-                                />
-                                <path
-                                    d="M0 150 C 30 100, 70 100, 100 150 C 130 200, 170 200, 200 150"
-                                    stroke="currentColor"
-                                    strokeWidth="0.5"
-                                    fill="none"
-                                    transform="translate(0, 20)"
-                                />
+                                <path d="M0 50 C 30 0, 70 0, 100 50 C 130 100, 170 100, 200 50" stroke="currentColor" strokeWidth="0.5" fill="none" />
+                                <path d="M0 150 C 30 100, 70 100, 100 150 C 130 200, 170 200, 200 150" stroke="currentColor" strokeWidth="0.5" fill="none" transform="translate(0, 20)" />
                             </pattern>
                         </defs>
                         <rect width="100%" height="100%" fill="url(#wavy-lines)" />
                     </svg>
                 </div>
 
+                {/* --- GALAXY NEBULAS --- */}
+                <div className="absolute top-[-10%] left-[-10%] w-[70vw] h-[70vw] bg-purple-900/20 rounded-full blur-[120px] mix-blend-screen animate-pulse" />
+                <div className="absolute bottom-[-10%] right-[-10%] w-[60vw] h-[60vw] bg-port-sky/10 rounded-full blur-[140px] mix-blend-overlay" />
+
                 {/* Dynamic Torch Light */}
                 <div
                     className="absolute inset-0 z-0 opacity-40 transition-opacity duration-500"
                     style={{
-                        background: `radial-gradient(circle at ${mouse.x}px ${mouse.y}px, rgba(56, 189, 248, 0.08), transparent 45%)`
+                        background: `radial-gradient(circle at ${mouse.x}px ${mouse.y}px, rgba(2, 179, 233, 0.12), transparent 45%)`
                     }}
                 />
-
-                {/* Ambient Nebula Blobs */}
-                <div className="absolute top-[10%] left-[-5%] w-[60vw] h-[60vw] bg-purple-900/15 rounded-full blur-[140px]" />
-                <div className="absolute bottom-[-10%] right-[-5%] w-[50vw] h-[50vw] bg-port-sky/10 rounded-full blur-[140px]" />
             </div>
 
-            {/* 2. MAIN CONTENT (80% Pattern) */}
-            <div className="relative z-10 w-[95%] md:w-[90%] lg:w-[80%] max-w-[1200px] grid grid-cols-1 lg:grid-cols-2 gap-20 items-center">
+            {/* 2. MAIN CONTENT */}
+            <div className="relative z-20 w-[95%] md:w-[90%] lg:w-[80%] max-w-[1200px] grid grid-cols-1 lg:grid-cols-2 gap-20 items-center">
 
                 {/* LEFT: TEXT BLOCK */}
                 <div className="flex flex-col items-start order-2 lg:order-1">
-                    {/* Status Badge */}
                     <motion.div
                         initial={{ opacity: 0, x: -20 }}
                         animate={{ opacity: 1, x: 0 }}
@@ -74,44 +82,28 @@ const HeroSection = () => {
                         </span>
                     </motion.div>
 
-                    <motion.div
-                        initial={{ opacity: 0, y: 20 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        transition={{ delay: 0.1 }}
-                    >
-                        <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold text-white tracking-tighter leading-[0.85] mb-8">
+                    <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.1 }}>
+                        <h1 className="text-5xl md:text-7xl lg:text-8xl font-bold text-white tracking-tighter leading-[0.85] mb-8">
                             Mubarak <br />
                             <span className="text-port-sky italic">Adeyemi.</span>
                         </h1>
                     </motion.div>
 
-                    <motion.div
-                        initial={{ opacity: 0 }}
-                        animate={{ opacity: 1 }}
-                        transition={{ delay: 0.3 }}
-                        className="flex items-start gap-6 max-w-md border-l border-white/10 pl-8"
-                    >
+                    <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.3 }} className="flex items-start gap-6 max-w-md border-l border-white/10 pl-8">
                         <p className="text-white/40 text-lg font-light leading-relaxed">
                             Frontend Engineer with <span className="text-white font-medium">4+ years</span> of experience crafting high-performance, visually refined digital products.
                         </p>
                     </motion.div>
 
-                    {/* CTA Group */}
                     <div className="mt-12 flex flex-wrap gap-6">
                         <MagneticButton>
-                            <a
-                                href="#projects"
-                                className="group px-10 py-5 bg-white text-black rounded-2xl font-black text-xs uppercase tracking-widest hover:bg-port-sky hover:text-white transition-all duration-500 flex items-center gap-3 shadow-2xl shadow-white/5"
-                            >
+                            <a href="#projects" className="group px-10 py-5 bg-white text-black rounded-2xl font-black text-xs uppercase tracking-widest hover:bg-port-sky hover:text-white transition-all duration-500 flex items-center gap-3 shadow-2xl shadow-white/5">
                                 Selected Works <ArrowDownRight size={18} className="group-hover:rotate-45 transition-transform duration-500" />
                             </a>
                         </MagneticButton>
 
                         <MagneticButton>
-                            <a
-                                href="#contact"
-                                className="px-10 py-5 border border-white/10 rounded-2xl text-white/40 hover:text-white hover:border-white/30 text-xs font-black uppercase tracking-widest transition-all duration-500"
-                            >
+                            <a href="#contact" className="px-10 py-5 border border-white/10 rounded-2xl text-white/40 hover:text-white hover:border-white/30 text-xs font-black uppercase tracking-widest transition-all duration-500">
                                 Let’s talk
                             </a>
                         </MagneticButton>
@@ -125,56 +117,59 @@ const HeroSection = () => {
                     transition={{ duration: 1 }}
                     className="relative order-1 lg:order-2 flex justify-center lg:justify-end"
                 >
-                    {/* Glass Card Composition */}
-                    <div className="relative w-[300px] h-[350px] md:w-[400px] md:h-[500px] group">
-                        {/* The "Shield" / Focal Card */}
-                        <div className="absolute inset-0 rounded-[3rem] border border-white/10 bg-white/[0.02] backdrop-blur-2xl rotate-[-6deg] transition-all duration-700 group-hover:rotate-0 group-hover:border-port-sky/30">
-                            {/* Inner wavy texture inside card */}
-                            <div className="absolute inset-0 opacity-[0.05] bg-white text-white/10 rounded-[3rem]">
-                                <svg width="100%" height="100%" xmlns="http://www.w3.org/2000/svg">
-                                    <pattern id="card-wavy" patternUnits="userSpaceOnUse" width="50" height="50" viewBox="0 0 50 50">
-                                        <path d="M0 10 C 15 -5, 35 -5, 50 10" stroke="currentColor" strokeWidth="0.5" fill="none" />
+                    <div className="relative w-[300px] h-[380px] md:w-[420px] md:h-[520px] group">
+
+                        {/* MAIN CARD (Profile Holder) */}
+                        <div className="absolute inset-0 rounded-[4rem] border border-white/10 bg-white/[0.02] backdrop-blur-2xl rotate-[-6deg] transition-all duration-700 group-hover:rotate-0 group-hover:border-port-sky/30 overflow-hidden">
+                            {/* Inner wavy texture */}
+                            <div className="absolute inset-0 opacity-[0.05] z-10 pointer-events-none">
+                                <svg width="100%" height="100%">
+                                    <pattern id="card-wavy-pattern" patternUnits="userSpaceOnUse" width="50" height="50" viewBox="0 0 50 50">
+                                        <path d="M0 10 C 15 -5, 35 -5, 50 10" stroke="white" strokeWidth="0.5" fill="none" />
                                     </pattern>
-                                    <rect width="100%" height="100%" fill="url(#card-wavy)" />
+                                    <rect width="100%" height="100%" fill="url(#card-wavy-pattern)" />
                                 </svg>
                             </div>
 
-                            {/* Branding / Floating Icons */}
-                            <div className="absolute top-12 left-12">
-                                <Globe className="text-port-sky w-10 h-10 opacity-50" />
+                            {/* Profile Image */}
+                            <Image
+                                src="/images/unnamed.jpg"
+                                alt="Mubarak Adeyemi"
+                                fill
+                                className="object-cover transition-all duration-700 opacity-80 group-hover:opacity-100 group-hover:scale-110"
+                            />
+
+                            {/* Corner Accents */}
+                            <div className="absolute top-10 left-10 z-20">
+                                <Globe className="text-port-sky w-8 h-8 opacity-50" />
                             </div>
-                            <div className="absolute bottom-12 right-12">
-                                <Zap className="text-purple-500 w-10 h-10 opacity-50" />
+                            <div className="absolute bottom-10 right-10 z-20">
+                                <Zap className="text-purple-500 w-8 h-8 opacity-50" />
                             </div>
                         </div>
 
-                        {/* --- UPDATE: FLOATING CARD WITH TECHSPACE IMAGE --- */}
+                        {/* FLOATING VIGNETTE (Tech Image) */}
                         <motion.div
-                            animate={{ y: [0, -20, 0] }}
-                            transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
-                            className="absolute -top-12 -right-12 w-38 h-38 rounded-[2.5rem] border border-white/10 bg-white/[0.03] backdrop-blur-3xl flex items-center justify-center rotate-12 overflow-hidden shadow-2xl shadow-port-sky/10"
+                            animate={{ y: [0, -25, 0], rotate: [12, 15, 12] }}
+                            transition={{ duration: 5, repeat: Infinity, ease: "easeInOut" }}
+                            className="absolute -top-16 -right-16 w-44 h-44 rounded-[3rem] border border-white/10 bg-[#0a0a0a] overflow-hidden shadow-2xl z-30"
                         >
-                            {/* The Workspace Vignette */}
                             <Image
                                 src="/images/unnamed.jpg"
-                                alt="Mubarack's Workspace Visual"
+                                alt="Tech Workspace"
                                 fill
-                                className="object-cover group-hover:scale-105 transition-transform duration-700 opacity-60 group-hover:opacity-100"
-                                quality={90}
+                                className="object-cover opacity-40 group-hover:opacity-100 transition-opacity"
                             />
-
-                            {/* Subtle light hit on the glass */}
-                            <div className="absolute top-[10%] left-[20%] w-[30%] h-[30%] bg-white/20 rounded-full blur-[4px] pointer-events-none" />
+                            <div className="absolute inset-0 bg-gradient-to-tr from-port-sky/20 to-transparent" />
                         </motion.div>
 
-                        {/* Bottom Glow */}
-                        <div className="absolute -bottom-10 left-1/2 -translate-x-1/2 w-2/3 h-1/4 bg-port-sky/20 blur-[60px] rounded-full opacity-50" />
+                        <div className="absolute -bottom-10 left-1/2 -translate-x-1/2 w-2/3 h-1/4 bg-port-sky/20 blur-[80px] rounded-full opacity-50" />
                     </div>
                 </motion.div>
             </div>
 
-            {/* 3. SCROLL PROGRESS INDICATOR */}
-            <div className="absolute bottom-12 flex flex-col items-center gap-4">
+            {/* 3. SCROLL INDICATOR */}
+            <div className="absolute bottom-12 z-20 flex flex-col items-center gap-4">
                 <span className="text-white/20 text-[10px] font-black uppercase tracking-[0.4em] rotate-180 [writing-mode:vertical-lr]">
                     Scroll
                 </span>
