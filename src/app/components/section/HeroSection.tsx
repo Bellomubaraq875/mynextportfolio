@@ -2,12 +2,27 @@
 
 import React, { useState } from "react";
 import { motion } from "framer-motion";
-import Image from "next/image";
-import { ArrowDownRight, Globe, Zap } from "lucide-react";
+import { ArrowDownRight, Globe, Zap, Terminal } from "lucide-react";
 import { MagneticButton } from "../ui/MagneticButton";
 
 const HeroSection = () => {
     const [mouse, setMouse] = useState({ x: 0, y: 0 });
+
+    const codeSnippet = [
+        "const developer = {",
+        '  name: "Mubarak Adeyemi",',
+        '  role: "Frontend Engineer",',
+        "  skills: ['NextJS', 'TypeScript'],",
+        "  experience: '4+ Years',",
+        "  passion: 'Scalable Architecture',",
+        "  focus: 'Visual Precision',",
+        "  status: 'Ready to Build',",
+        "};",
+        "",
+        "function createImpact() {",
+        "  return code.transform(ideas);",
+        "}",
+    ];
 
     return (
         <section
@@ -83,14 +98,14 @@ const HeroSection = () => {
                     </motion.div>
 
                     <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.1 }}>
-                        <h1 className="text-5xl md:text-7xl lg:text-8xl font-bold text-white tracking-tighter leading-[0.85] mb-8">
+                        <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold text-white tracking-tighter leading-[0.85] mb-8">
                             Mubarak <br />
                             <span className="text-port-sky italic">Adeyemi.</span>
                         </h1>
                     </motion.div>
 
                     <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.3 }} className="flex items-start gap-6 max-w-md border-l border-white/10 pl-8">
-                        <p className="text-white/40 text-lg font-light leading-relaxed">
+                        <p className="text-white/40 text-lg font-light leading-relaxed font-sans">
                             Frontend Engineer with <span className="text-white font-medium">4+ years</span> of experience crafting high-performance, visually refined digital products.
                         </p>
                     </motion.div>
@@ -110,7 +125,7 @@ const HeroSection = () => {
                     </div>
                 </div>
 
-                {/* RIGHT: VISUAL COMPOSITION */}
+                {/* RIGHT: VISUAL COMPOSITION (CODE CORE) */}
                 <motion.div
                     initial={{ opacity: 0, scale: 0.8 }}
                     animate={{ opacity: 1, scale: 1 }}
@@ -119,48 +134,79 @@ const HeroSection = () => {
                 >
                     <div className="relative w-[300px] h-[380px] md:w-[420px] md:h-[520px] group">
 
-                        {/* MAIN CARD (Profile Holder) */}
-                        <div className="absolute inset-0 rounded-[4rem] border border-white/10 bg-white/[0.02] backdrop-blur-2xl rotate-[-6deg] transition-all duration-700 group-hover:rotate-0 group-hover:border-port-sky/30 overflow-hidden">
-                            {/* Inner wavy texture */}
-                            <div className="absolute inset-0 opacity-[0.05] z-10 pointer-events-none">
-                                <svg width="100%" height="100%">
-                                    <pattern id="card-wavy-pattern" patternUnits="userSpaceOnUse" width="50" height="50" viewBox="0 0 50 50">
-                                        <path d="M0 10 C 15 -5, 35 -5, 50 10" stroke="white" strokeWidth="0.5" fill="none" />
-                                    </pattern>
-                                    <rect width="100%" height="100%" fill="url(#card-wavy-pattern)" />
-                                </svg>
+                        {/* MAIN CARD - Scrollable Code Core */}
+                        <div className="absolute inset-0 rounded-[4rem] border border-white/10 bg-white/[0.03] backdrop-blur-2xl rotate-[-6deg] transition-all duration-700 group-hover:rotate-0 group-hover:border-port-sky/30 overflow-hidden shadow-2xl flex flex-col p-12">
+
+                            {/* Top Bar */}
+                            <div className="flex justify-between items-center mb-10 opacity-40">
+                                <div className="flex gap-2">
+                                    <div className="w-2.5 h-2.5 rounded-full bg-red-500/50" />
+                                    <div className="w-2.5 h-2.5 rounded-full bg-yellow-500/50" />
+                                    <div className="w-2.5 h-2.5 rounded-full bg-green-500/50" />
+                                </div>
+                                <span className="text-[10px] font-mono tracking-widest uppercase">portfolio.ts</span>
                             </div>
 
-                            {/* Profile Image */}
-                            <Image
-                                src="/images/unnamed.jpg"
-                                alt="Mubarak Adeyemi"
-                                fill
-                                className="object-cover transition-all duration-700 opacity-80 group-hover:opacity-100 group-hover:scale-110"
-                            />
-
-                            {/* Corner Accents */}
-                            <div className="absolute top-10 left-10 z-20">
-                                <Globe className="text-port-sky w-8 h-8 opacity-50" />
+                            {/* Scrolling Code Snippets */}
+                            <div className="relative flex-1 font-mono text-[11px] md:text-[13px] leading-relaxed overflow-hidden">
+                                <motion.div
+                                    animate={{ y: [0, -150, 0] }}
+                                    transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
+                                    className="space-y-1"
+                                >
+                                    {codeSnippet.map((line, i) => (
+                                        <div key={i} className="whitespace-nowrap">
+                                            <span className="text-white/20 mr-4 select-none">{(i + 1).toString().padStart(2, '0')}</span>
+                                            <span className={`${line.includes('const') || line.includes('function') || line.includes('return') ? 'text-purple-400' :
+                                                    line.includes(':') ? 'text-port-sky' :
+                                                        line.includes("'") ? 'text-green-400' : 'text-white/60'
+                                                }`}>
+                                                {line}
+                                            </span>
+                                        </div>
+                                    ))}
+                                    {/* Duplicate for seamless loop */}
+                                    {codeSnippet.map((line, i) => (
+                                        <div key={`dup-${i}`} className="whitespace-nowrap opacity-50">
+                                            <span className="text-white/20 mr-4 select-none">{(i + 14).toString().padStart(2, '0')}</span>
+                                            <span className="text-white/60">{line}</span>
+                                        </div>
+                                    ))}
+                                </motion.div>
                             </div>
-                            <div className="absolute bottom-10 right-10 z-20">
-                                <Zap className="text-purple-500 w-8 h-8 opacity-50" />
+
+                            {/* Bottom Corner Icons */}
+                            <div className="absolute bottom-10 right-10 z-20 opacity-20 group-hover:opacity-50 transition-opacity">
+                                <Globe size={24} className="text-port-sky" />
                             </div>
                         </div>
 
-                        {/* FLOATING VIGNETTE (Tech Image) */}
+                        {/* FLOATING MINI-CONSOLE (Vignette) */}
                         <motion.div
                             animate={{ y: [0, -25, 0], rotate: [12, 15, 12] }}
                             transition={{ duration: 5, repeat: Infinity, ease: "easeInOut" }}
-                            className="absolute -top-16 -right-16 w-44 h-44 rounded-[3rem] border border-white/10 bg-[#0a0a0a] overflow-hidden shadow-2xl z-30"
+                            className="absolute -top-16 -right-16 w-48 h-48 rounded-[3rem] border border-white/10 bg-[#0a0a0a]/90 backdrop-blur-xl shadow-2xl z-30 flex flex-col p-6 overflow-hidden"
                         >
-                            <Image
-                                src="/images/unnamed.jpg"
-                                alt="Tech Workspace"
-                                fill
-                                className="object-cover opacity-40 group-hover:opacity-100 transition-opacity"
-                            />
-                            <div className="absolute inset-0 bg-gradient-to-tr from-port-sky/20 to-transparent" />
+                            <div className="flex gap-1.5 mb-4">
+                                <div className="w-2 h-2 rounded-full bg-red-500/50" />
+                                <div className="w-2 h-2 rounded-full bg-yellow-500/50" />
+                                <div className="w-2 h-2 rounded-full bg-green-500/50" />
+                            </div>
+                            <div className="space-y-2">
+                                <div className="h-1.5 w-full bg-white/5 rounded-full overflow-hidden">
+                                    <motion.div
+                                        animate={{ x: ["-100%", "100%"] }}
+                                        transition={{ duration: 2, repeat: Infinity, ease: "linear" }}
+                                        className="h-full w-1/3 bg-port-sky/40"
+                                    />
+                                </div>
+                                <div className="h-1.5 w-3/4 bg-white/5 rounded-full" />
+                                <div className="h-1.5 w-1/2 bg-white/5 rounded-full" />
+                            </div>
+                            <div className="mt-auto flex justify-between items-end">
+                                <Terminal size={16} className="text-white/20" />
+                                <span className="text-[8px] font-mono text-port-sky/40">v14.2.0</span>
+                            </div>
                         </motion.div>
 
                         <div className="absolute -bottom-10 left-1/2 -translate-x-1/2 w-2/3 h-1/4 bg-port-sky/20 blur-[80px] rounded-full opacity-50" />
