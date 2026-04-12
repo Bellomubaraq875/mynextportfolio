@@ -60,10 +60,10 @@ const Header = () => {
               className="object-contain p-1.5 opacity-80 group-hover:opacity-100 transition-opacity"
             />
           </div>
-          <div className="hidden sm:flex flex-col">
+          {/* <div className="hidden sm:flex flex-col">
             <span className="text-white text-[10px] font-black uppercase tracking-[0.2em] leading-none">Mubarak</span>
             <span className="text-port-sky text-[10px] font-black uppercase tracking-[0.2em] mt-1">Adeyemi</span>
-          </div>
+          </div> */}
         </Link>
 
         {/* CENTRAL NAVIGATION (Desktop) */}
