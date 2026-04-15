@@ -1,30 +1,26 @@
 import type { Metadata } from "next";
-import { Jost, Orbitron } from "next/font/google";
+import { Jost } from "next/font/google";
 import "./globals.css";
-import Header from "./components/layout/Header";
-import Footer from "./components/layout/Footer";
-import { Providers } from "../lib/providers";
+
+// import 'react-toastify/dist/ReactToastify.css';
+import { ToastContainer } from "react-toastify";
 
 const jost = Jost({
   subsets: ["latin"],
-  weight: ["300", "400", "500", "600", "700"],
-  variable: "--font-jost",
-  display: "swap",
-});
-
-const orbitron = Orbitron({
-  subsets: ["latin"],
   weight: ["400", "500", "600", "700"],
-  variable: "--font-orbitron",
-  display: "swap",
+  variable: "--font-jost",
 });
 
 export const metadata: Metadata = {
-  title: "Mubarak Bello | Frontend Developer",
-  description:
-    "Portfolio of Mubarak Bello, a Frontend Developer specialized in sleek UI/UX.",
+  title: "KingsCarNotAutomobile - ",
+  description: "Platform for automobile",
   icons: {
-    icon: "/logo/favicon.png",
+    icon: "/images/favicon1.png",
+    shortcut: "/images/favicon1.png",
+    apple: "/images/favicon1.png",
+    other: [
+      { rel: "icon", url: "/images/favicon1.png", sizes: "32x32" }
+    ],
   },
 };
 
@@ -34,17 +30,25 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html
-      lang="en"
-      className={`${jost.variable} ${orbitron.variable} scroll-smooth`}
-      suppressHydrationWarning
-    >
-      <body className="font-sans bg-[#0a0a0a] text-white antialiased selection:bg-port-sky/30 selection:text-port-sky">
-        <Providers>
-          <Header />
-          <main className="min-h-screen">{children}</main>
-          <Footer />
-        </Providers>
+    <html lang="en" className={jost.className}>
+      <body className="antialiased bg-white text-gray-900">
+        
+            {/* Next.js automatically wraps children in Suspense using loading.tsx */}
+            {children}
+
+            <ToastContainer
+              position="top-right"
+              autoClose={5000}
+              hideProgressBar={false}
+              newestOnTop={false}
+              closeOnClick
+              rtl={false}
+              pauseOnFocusLoss
+              draggable
+              pauseOnHover
+              theme="colored"
+            />
+          
       </body>
     </html>
   );

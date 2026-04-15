@@ -1,111 +1,123 @@
 "use client";
 
-import React, { useState } from "react";
-import { motion } from "framer-motion";
-import { Github, Linkedin, Mail, ArrowUpRight, MapPin } from "lucide-react";
-import { MagneticButton } from "../ui/MagneticButton";
+import React from 'react';
+import Image from 'next/image';
+import Link from 'next/link';
+import {
+  Facebook,
+  Instagram,
+  Twitter,
+  Linkedin,
+  Mail,
+  Phone,
+  MapPin,
+  ArrowUpRight,
+  Send
+} from 'lucide-react';
 
 const Footer = () => {
-  const [mouse, setMouse] = useState({ x: 0, y: 0 });
+  const currentYear = new Date().getFullYear();
+
+  const footerLinks = {
+    Company: ['About Us', 'News', 'Testimonials', 'Founder'],
+    Services: ['ECU Repair', 'Key Programming', 'Diagnostics', 'Coding'],
+    Support: ['Contact', 'FAQ', 'Privacy Policy', 'Terms of Service'],
+  };
 
   return (
-    <footer
-      onMouseMove={(e) => setMouse({ x: e.clientX, y: e.clientY })}
-      className="relative px-6 pt-32 pb-10 bg-[#050505] flex flex-col items-center overflow-hidden"
-    >
-      {/* Dynamic Background Pattern */}
-      <div className="absolute inset-0 z-0 pointer-events-none">
-        <div
-          className="absolute inset-0 z-0 opacity-40 transition-opacity duration-500"
-          style={{
-            background: `radial-gradient(circle at ${mouse.x}px ${mouse.y}px, rgba(56, 189, 248, 0.05), transparent 45%)`
-          }}
-        />
-        <div className="absolute top-0 left-[10%] w-[50vw] h-[50vw] bg-blue-900/10 rounded-full blur-[140px]" />
-        <div className="absolute bottom-0 right-[10%] w-[40vw] h-[40vw] bg-purple-900/10 rounded-full blur-[140px]" />
-      </div>
+    <footer className="bg-[#04070F] text-white pt-24 pb-12 overflow-hidden border-t border-white/5">
+      <div className="w-[80%] max-w-[1400px] mx-auto">
 
-      <div className="relative z-10 w-[95%] md:w-[90%] lg:w-[80%] max-w-[1200px] flex flex-col gap-24">
-
-        {/* BIG CTA SECTION */}
-        <div className="flex flex-col lg:flex-row justify-between items-start lg:items-center gap-12">
-          <div className="max-w-2xl">
-            <h2 className="text-4xl md:text-6xl font-bold text-white tracking-tighter mb-6">
-              Ready to bring your <br /> ideas to life?
-            </h2>
-            <div className="flex flex-wrap gap-4 text-white/40 text-[10px] uppercase font-bold tracking-[0.2em]">
-              <span className="flex items-center gap-2"><MapPin size={12} className="text-port-sky" /> Ibadan, Nigeria</span>
-              <span>•</span>
-              <span>Available for Freelance</span>
-            </div>
-          </div>
-
-          <MagneticButton>
-            <a
-              href="#contact"
-              className="group flex items-center gap-4 px-10 py-5 bg-white text-black font-black rounded-2xl hover:bg-port-sky hover:text-white transition-all duration-500 text-xs uppercase tracking-widest shadow-2xl shadow-white/5"
-            >
-              Start a Project <ArrowUpRight size={20} className="group-hover:rotate-45 transition-transform duration-500" />
-            </a>
-          </MagneticButton>
-        </div>
-
-        {/* MAIN FOOTER LINKS */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 pt-20 border-t border-white/5">
-
-          {/* Brand Info */}
-          <div className="lg:col-span-2 space-y-6">
-            <h3 className="text-2xl font-bold text-white tracking-tighter">Bello M. Adeyemi</h3>
-            <p className="text-white/40 text-sm leading-relaxed max-w-xs font-sans font-light italic">
-              "Crafting high-performance digital products with a focus on precision, speed, and visual elegance."
+        {/* 1. TOP SECTION: BRAND & NEWSLETTER */}
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-20 pb-20 border-b border-white/5">
+          <div className="space-y-8">
+            <Link href="/" className="flex items-center gap-4 group">
+              <div className="relative w-12 h-12 overflow-hidden rounded-xl bg-slate-900 border border-white/10 flex items-center justify-center">
+                <span className="text-xl font-black text-blue-500">K</span>
+              </div>
+              <div className="flex flex-col">
+                <span className="text-lg font-black tracking-[0.05em] text-white leading-none">
+                  KINGSCAR<span className="text-blue-600">NOT</span>
+                </span>
+                <span className="text-[8.5px] uppercase tracking-[0.52em] text-gray-500 font-bold leading-none mt-1.5">
+                  Automobile
+                </span>
+              </div>
+            </Link>
+            <p className="text-gray-400 max-w-sm leading-relaxed font-medium">
+              Elevating automotive performance through dealer-level diagnostics
+              and precision software engineering.
             </p>
-          </div>
-
-          {/* Navigation */}
-          <div className="space-y-6">
-            <h4 className="text-white text-[10px] uppercase tracking-[0.4em] font-black opacity-30">Menu</h4>
-            <div className="flex flex-col gap-4 text-sm font-medium">
-              {["About", "Projects", "Experience", "Contact"].map((item) => (
-                <a key={item} href={`#${item.toLowerCase()}`} className="text-white/50 hover:text-port-sky transition-colors w-fit">
-                  {item}
-                </a>
+            <div className="flex gap-4">
+              {[Facebook, Instagram, Twitter, Linkedin].map((Icon, i) => (
+                <Link key={i} href="#" className="w-10 h-10 rounded-full border border-white/10 flex items-center justify-center hover:bg-blue-600 hover:border-blue-600 transition-all duration-300">
+                  <Icon size={16} />
+                </Link>
               ))}
             </div>
           </div>
 
-          {/* Socials */}
-          <div className="space-y-6">
-            <h4 className="text-white text-[10px] uppercase tracking-[0.4em] font-black opacity-30">Socials</h4>
-            <div className="flex gap-3">
-              {[
-                { icon: <Github size={18} />, href: "https://github.com/Bellomubaraq875", color: "hover:bg-white hover:text-black" },
-                { icon: <Linkedin size={18} />, href: "https://linkedin.com/in/mubarak-bello-213b8110b", color: "hover:bg-[#0077b5] hover:text-white" },
-                { icon: <Mail size={18} />, href: "mailto:bellomubaraq875@gmail.com", color: "hover:bg-port-sky hover:text-white" }
-              ].map((social, i) => (
-                <MagneticButton key={i}>
-                  <a
-                    href={social.href}
-                    target="_blank"
-                    className={`w-12 h-12 rounded-xl bg-white/5 border border-white/10 flex items-center justify-center text-white/40 transition-all duration-300 ${social.color} hover:border-transparent`}
-                  >
-                    {social.icon}
-                  </a>
-                </MagneticButton>
-              ))}
+          <div className="bg-white/[0.02] backdrop-blur-xl rounded-[40px] p-10 border border-white/5 space-y-6">
+            <h3 className="text-xl font-bold tracking-tight">Join the Inner Circle</h3>
+            <p className="text-sm text-gray-400">Receive technical updates and exclusive service offers.</p>
+            <div className="relative">
+              <input
+                type="email"
+                placeholder="Enter your email"
+                className="w-full bg-white/5 border border-white/10 rounded-2xl px-6 py-4 text-sm focus:outline-none focus:border-blue-500 transition-all"
+              />
+              <button className="absolute right-2 top-2 bottom-2 bg-blue-600 hover:bg-blue-700 px-6 rounded-xl transition-all flex items-center justify-center">
+                <Send size={16} />
+              </button>
             </div>
           </div>
         </div>
 
-        {/* COPYRIGHT AREA */}
-        <div className="flex flex-col md:flex-row justify-between items-center gap-6 pt-10 border-t border-white/5 text-[10px] uppercase tracking-widest font-bold text-white/20">
-          <p>© {new Date().getFullYear()} BELLO MUBARAK ADEYEMI</p>
-          <div className="flex items-center gap-8">
-            <span className="hover:text-white transition-colors cursor-default">Next.js 14</span>
-            <span className="hover:text-white transition-colors cursor-default">Framer Motion</span>
-            <span className="hover:text-white transition-colors cursor-default">Tailwind CSS</span>
+        {/* 2. MIDDLE SECTION: LINKS GRID */}
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-12 py-20">
+          {Object.entries(footerLinks).map(([title, links]) => (
+            <div key={title} className="space-y-6">
+              <h4 className="text-[10px] font-black tracking-[0.3em] text-blue-500 uppercase">{title}</h4>
+              <ul className="space-y-4">
+                {links.map((link) => (
+                  <li key={link}>
+                    <Link href="#" className="text-sm text-gray-400 hover:text-white transition-colors flex items-center gap-1 group">
+                      {link}
+                      <ArrowUpRight size={12} className="opacity-0 group-hover:opacity-100 transition-all -translate-y-1" />
+                    </Link>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          ))}
+
+          <div className="space-y-6">
+            <h4 className="text-[10px] font-black tracking-[0.3em] text-blue-500 uppercase">Contact</h4>
+            <ul className="space-y-4 text-sm text-gray-400">
+              <li className="flex items-center gap-3">
+                <MapPin size={16} className="text-blue-500" /> Ibadan, Nigeria
+              </li>
+              <li className="flex items-center gap-3">
+                <Phone size={16} className="text-blue-500" /> +234 810 000 0000
+              </li>
+              <li className="flex items-center gap-3">
+                <Mail size={16} className="text-blue-500" /> support@kingscarnot.com
+              </li>
+            </ul>
           </div>
         </div>
 
+        {/* 3. BOTTOM SECTION: COPYRIGHT */}
+        <div className="pt-12 border-t border-white/5 flex flex-col md:flex-row justify-between items-center gap-6">
+          <p className="text-[10px] font-bold text-gray-600 uppercase tracking-widest">
+            © {currentYear} KINGSCARNOT AUTOMOBILE. All Rights Reserved.
+          </p>
+          <div className="flex gap-8 text-[10px] font-bold text-gray-600 uppercase tracking-widest">
+            <Link href="#" className="hover:text-blue-500 transition-colors">Security</Link>
+            <Link href="#" className="hover:text-blue-500 transition-colors">Sitemap</Link>
+            <Link href="#" className="hover:text-blue-500 transition-colors">Cookie Policy</Link>
+          </div>
+        </div>
       </div>
     </footer>
   );
